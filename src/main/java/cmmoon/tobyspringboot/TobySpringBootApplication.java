@@ -12,6 +12,9 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 import java.io.IOException;
 
@@ -55,33 +58,33 @@ public class TobySpringBootApplication {
             servletContext.addServlet("hello", new HttpServlet() {
                 @Override
                 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                    resp.setStatus(200);
-                    resp.setHeader("Content-Type", "text/plain");
-                    resp.getWriter().println("Hello Servlet");
+                    String name = req.getParameter("name");
+                    resp.setStatus(HttpStatus.OK.value());
+                    resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                    resp.getWriter().println("Hello " + name);
                 }
             }).addMapping("/hello");
         });
         /*
-        $ curl -v http://localhost:8080/hello
+$ curl -v "http://localhost:8080/hello?name=test"
 * Host localhost:8080 was resolved.
 * IPv6: ::1
 * IPv4: 127.0.0.1
 *   Trying [::1]:8080...
 * Connected to localhost (::1) port 8080
 * using HTTP/1.x
-> GET /hello HTTP/1.1
+> GET /hello?name=test HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/8.12.1
 > Accept: *\/*
 >
 < HTTP/1.1 200
                 < Content-Type: text/plain;charset=ISO-8859-1
-                < Content-Length: 15
-                < Date: Wed, 20 Aug 2025 06:53:24 GMT
+                < Content-Length: 12
+                < Date: Thu, 21 Aug 2025 12:09:44 GMT
                 <
-                        Hello Servlet
+                        Hello test
 * Connection #0 to host localhost left intact
-
 
                 */
 
