@@ -71,11 +71,10 @@ public class TobySpringBootApplication {
 
                         String ret = helloController.hello(name);
 
-                        resp.setStatus(HttpStatus.OK.value());
-                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+//                        resp.setStatus(HttpStatus.OK.value());
+//                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                        resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
                         resp.getWriter().println(ret);
-                    } else if (req.getRequestURI().equals("/user")) {
-
                     } else {
                         resp.setStatus(HttpStatus.NOT_FOUND.value());
                     }
