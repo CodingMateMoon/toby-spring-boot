@@ -49,6 +49,8 @@ public class TobySpringBootApplication {
          */
         GenericApplicationContext applicationContext = new GenericApplicationContext();
         applicationContext.registerBean(HelloController.class);
+        // container에 HelloService 인터페이스를 구현한 bean 찾아서 의존성 주입
+        applicationContext.registerBean(SimpleHelloService.class);
         // bean 오브젝트 생성
         applicationContext.refresh();
 
