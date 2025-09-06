@@ -13,6 +13,7 @@ import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
@@ -28,22 +29,14 @@ import java.io.IOException;
 /* Bean 오브젝트 팩토리 메서드를 가진 클래스임을 명시. AnnotationConfig를 이용하는 ApplicationContext에 처음으로 등록됨(@Configuration 붙은 클래스)
  */
 @Configuration
+//해당 클래스가 속한 패키지부터 시작해서 하위 패키지를 전부 탐색해서 컴포넌트가 붙은 클래스들을 전부 빈으로 등록
+@ComponentScan
 public class TobySpringBootApplication {
-
-    @Bean
-    public HelloController helloController(HelloService helloService){
-        return new HelloController(helloService);
-    }
-
-    // 스프링 컨테이너의 Bean 오브젝트를 만드는 팩토리 메서드임을 명시
-    @Bean
-    public HelloService helloService(){
-        return new SimpleHelloService();
-    }
 
     public static void main(String[] args) {
         /*
         자바 코드로 만든 Configuration 정보를 읽기 위한 클래스로 변경
+        curl -v "http://localhost:8080/hello?name=test"
          */
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext(){
             @Override
