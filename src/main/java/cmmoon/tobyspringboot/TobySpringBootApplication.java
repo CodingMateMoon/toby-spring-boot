@@ -27,10 +27,15 @@ public class TobySpringBootApplication {
     }
 
     public static void main(String[] args) {
-        /*
-        자바 코드로 만든 Configuration 정보를 읽기 위한 클래스로 변경
-        curl -v "http://localhost:8080/hello?name=test"
-         */
+        // Configuration, ComponantScan 팩토리 메서드를 가지고 스프링 컨테이너에게 애플리케이션 구성을 어떻게 할 것인가에 대한 정보를 가진 클래스
+        run(TobySpringBootApplication.class, args);
+    }
+
+    private static void run(Class<?> applicationClass, String... args) {
+    /*
+    자바 코드로 만든 Configuration 정보를 읽기 위한 클래스로 변경
+    curl -v "http://localhost:8080/hello?name=test"
+     */
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext(){
             @Override
             protected void onRefresh() {
@@ -45,9 +50,9 @@ public class TobySpringBootApplication {
                 webServer.start();
             }
         };
-        applicationContext.register(TobySpringBootApplication.class);
+//        applicationContext.register(TobySpringBootApplication.class);
+        applicationContext.register(applicationClass);
         // bean 오브젝트 생성
         applicationContext.refresh();
-
     }
 }
