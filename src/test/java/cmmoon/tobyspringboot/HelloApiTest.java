@@ -1,7 +1,9 @@
 package cmmoon.tobyspringboot;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class HelloApiTest {
@@ -16,6 +18,7 @@ public class HelloApiTest {
 
         // 응답 검증
         // status code 200
+        Assertions.assertThat(res.getStatusCode()).isEqualTo(HttpStatus.OK);
         // header(content-type) text/plain
         // body Hello Spring
     }
