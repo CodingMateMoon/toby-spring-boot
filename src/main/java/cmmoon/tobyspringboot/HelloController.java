@@ -1,6 +1,5 @@
 package cmmoon.tobyspringboot;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +12,11 @@ import java.util.Objects;
  */
 public class HelloController {
     private final HelloService helloService;
+
+    public HelloController(HelloService helloService) {
+        this.helloService = helloService;
+    }
+    /*
     // 생성자를 통해 인스턴스가 만들어진 이후에 setApplicationContext 호출하기 때문에 final은 불가
     private final ApplicationContext applicationContext;
 
@@ -22,6 +26,8 @@ public class HelloController {
 
         System.out.println(applicationContext);
     }
+
+     */
 
     @GetMapping("/hello")
 //    @ResponseBody
