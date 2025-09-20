@@ -18,4 +18,12 @@ public class HelloControllerTest {
         String ret = helloController.hello("Test");
         Assertions.assertThat(ret).isEqualTo("Test");
     }
+
+    @Test
+    void failsHelloController() {
+        HelloController helloController = new HelloController(name -> name);
+
+//        String ret = helloController.hello(null);
+        Assertions.assertThatThrownBy(()-> {String ret = helloController.hello(null);}).isInstanceOf(NullPointerException.class);
+    }
 }
