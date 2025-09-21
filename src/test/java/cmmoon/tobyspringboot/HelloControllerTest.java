@@ -23,7 +23,7 @@ public class HelloControllerTest {
     void failsHelloController() {
         HelloController helloController = new HelloController(name -> name);
 
-//        String ret = helloController.hello(null);
-        Assertions.assertThatThrownBy(()-> {String ret = helloController.hello(null);}).isInstanceOf(NullPointerException.class);
+        Assertions.assertThatThrownBy(()-> {String ret = helloController.hello(null);}).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(()-> {String ret = helloController.hello("");}).isInstanceOf(IllegalArgumentException.class);
     }
 }
