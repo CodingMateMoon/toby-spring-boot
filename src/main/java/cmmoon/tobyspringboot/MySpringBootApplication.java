@@ -1,10 +1,8 @@
 package cmmoon.tobyspringboot;
 
-import cmmoon.config.autoconfig.DispatcherServletConfig;
-import cmmoon.config.autoconfig.TomcatWebServerConfig;
+import cmmoon.config.autoconfig.EnableMyAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,6 +15,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Configuration
 @ComponentScan
-@Import({DispatcherServletConfig.class, TomcatWebServerConfig.class})
+@EnableMyAutoConfiguration
 public @interface MySpringBootApplication {
 }
