@@ -1,5 +1,6 @@
 package cmmoon.tobyspringboot;
 
+import cmmoon.config.MySpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootApplication

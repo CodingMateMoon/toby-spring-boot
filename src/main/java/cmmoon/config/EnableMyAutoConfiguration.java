@@ -1,5 +1,7 @@
-package cmmoon.config.autoconfig;
+package cmmoon.config;
 
+import cmmoon.config.autoconfig.DispatcherServletConfig;
+import cmmoon.config.autoconfig.TomcatWebServerConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
