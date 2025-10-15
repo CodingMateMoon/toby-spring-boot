@@ -21,6 +21,7 @@ public class MyAutoConfigImportSelector implements DeferredImportSelector {
         for(String candidate : ImportCandidates.load(MyAutoConfiguration.class, classLoader)){
             autoConfigs.add(candidate);
         }
-        return autoConfigs.toArray(new String[0]);
+//        return autoConfigs.toArray(new String[0]);
+        return autoConfigs.stream().toArray(String[]::new);
     }
 }
