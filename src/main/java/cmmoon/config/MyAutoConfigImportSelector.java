@@ -18,10 +18,13 @@ public class MyAutoConfigImportSelector implements DeferredImportSelector {
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
         List<String> autoConfigs = new ArrayList<>();
+        ImportCandidates.load(MyAutoConfiguration.class, classLoader).forEach(autoConfigs::add);
+/*
         for(String candidate : ImportCandidates.load(MyAutoConfiguration.class, classLoader)){
             autoConfigs.add(candidate);
         }
-//        return autoConfigs.toArray(new String[0]);
-        return autoConfigs.stream().toArray(String[]::new);
+*/
+        return autoConfigs.toArray(new String[0]);
+//        return Arrays.copyOf(autoConfigs.toArray(), autoConfigs.size(), String[].class);
     }
 }
