@@ -39,7 +39,7 @@ public class ConfigurationTest {
 
         @Override
         Common common() {
-            if (this.common == null) return super.common();
+            if (this.common == null) this.common = super.common();
 
             return this.common;
         }
