@@ -1,2 +1,3 @@
 cmmoon.config.autoconfig.TomcatWebServerConfig
+cmmoon.config.autoconfig.JettyWebServerConfig
 cmmoon.config.autoconfig.DispatcherServletConfig
