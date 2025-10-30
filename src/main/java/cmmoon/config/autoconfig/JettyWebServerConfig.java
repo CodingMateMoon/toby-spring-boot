@@ -20,7 +20,7 @@ public class JettyWebServerConfig {
     static class JettyCondition implements Condition {
         @Override
         public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return false;
+            return true;
         }
     }
 }
