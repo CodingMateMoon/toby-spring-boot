@@ -13,16 +13,16 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @Conditional(TomcatWebServerConfig.TomcatCondition.class)
 public class TomcatWebServerConfig {
     // ServletWebServerFactory, DispatcherServlet 빈으로 등록할 경우 유연한 구성 정보 설정 가능
-    @Bean("TomcatWebServerFactory")
+    @Bean("tomcatWebServerFactory")
     public ServletWebServerFactory servletWebServerFactory() {
         return new TomcatServletWebServerFactory();
     }
 
 
-    class TomcatCondition implements Condition {
+    static class TomcatCondition implements Condition {
         @Override
         public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return false;
+            return true;
         }
     }
 }
