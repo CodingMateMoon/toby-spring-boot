@@ -22,6 +22,7 @@ public class ConditionalTest {
         }
     }
     @Configuration
+    @Conditional(FalseCondition.class)
     static class Config2 {
         @Bean
         MyBean myBean(){
