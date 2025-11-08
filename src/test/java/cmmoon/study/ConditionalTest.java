@@ -8,6 +8,11 @@ public class ConditionalTest {
     @Test
     void conditional(){
         // true
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+        ac.register(Config1.class);
+        ac.refresh();
+
+        MyBean bean = ac.getBean(MyBean.class);
 
 
         //false
