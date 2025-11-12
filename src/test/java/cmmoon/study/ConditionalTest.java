@@ -9,6 +9,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,11 +48,19 @@ public class ConditionalTest {
     }
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
+    @Conditional(BooleanCondition.class)
+    @interface BooleanConditional{
+        boolean value();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
     @Conditional(TrueCondition.class)
     @interface TrueConditional{}
 
     @Configuration
-    @TrueConditional
+//    @TrueConditional
+    @BooleanConditional(true)
     static class Config1 {
         @Bean
         MyBean myBean(){
@@ -66,7 +75,8 @@ public class ConditionalTest {
 
 
     @Configuration
-    @FalseConditional
+//    @FalseConditional
+    @BooleanConditional(false)
     static class Config2 {
         @Bean
         MyBean myBean(){
@@ -93,5 +103,17 @@ public class ConditionalTest {
             return false;
         }
     }
+
+    static class BooleanCondition implements Condition {
+
+        @Override
+        public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+            // annotation 안의 속성값 읽어옴
+            Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(BooleanConditional.class.getName());
+            Boolean value = (Boolean) annotationAttributes.get("value");
+            return value;
+        }
+    }
+
 
 }
