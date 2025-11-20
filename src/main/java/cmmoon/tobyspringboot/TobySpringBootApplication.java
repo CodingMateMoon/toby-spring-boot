@@ -1,7 +1,10 @@
 package cmmoon.tobyspringboot;
 
 import cmmoon.config.MySpringBootApplication;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 @MySpringBootApplication
 /* Bean 오브젝트 팩토리 메서드를 가진 클래스임을 명시. AnnotationConfig를 이용하는 ApplicationContext에 처음으로 등록됨(@Configuration 붙은 클래스)
@@ -13,6 +16,14 @@ import org.springframework.boot.SpringApplication;
 */
 //@SpringBootApplication
 public class TobySpringBootApplication {
+
+    @Bean
+    ApplicationRunner applicationRunner(Environment env){
+        return args -> {
+            String name = env.getProperty("my.name");
+            System.out.println("my.name: " + name);
+        };
+    }
 
     public static void main(String[] args) {
         // Configuration, ComponantScan 팩토리 메서드를 가지고 스프링 컨테이너에게 애플리케이션 구성을 어떻게 할 것인가에 대한 정보를 가진 클래스
