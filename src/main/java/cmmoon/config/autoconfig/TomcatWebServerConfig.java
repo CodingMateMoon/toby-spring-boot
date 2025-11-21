@@ -19,7 +19,11 @@ public class TomcatWebServerConfig {
      */
     @ConditionalOnMissingBean
     public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
+        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+        // 모든 서블릿 매핑 앞에 해당 path가 붙음
+        // curl -v "http://localhost:8080/app/hello?name=test"
+        factory.setContextPath("/app");
+        return factory;
     }
 
 
