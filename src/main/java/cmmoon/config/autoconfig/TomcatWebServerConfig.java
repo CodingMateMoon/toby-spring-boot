@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 @MyAutoConfiguration
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
@@ -18,11 +19,12 @@ public class TomcatWebServerConfig {
     같은 타입의 빈이 없는 경우에만 등록
      */
     @ConditionalOnMissingBean
-    public ServletWebServerFactory servletWebServerFactory() {
+    public ServletWebServerFactory servletWebServerFactory(Environment env) {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         // 모든 서블릿 매핑 앞에 해당 path가 붙음
         // curl -v "http://localhost:8080/app/hello?name=test"
-        factory.setContextPath("/app");
+        factory.setContextPath(env.getProperty("contextPath"));
+//        factory.setContextPath("/app");
         return factory;
     }
 
