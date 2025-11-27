@@ -14,8 +14,11 @@ import org.springframework.core.env.Environment;
 //@Conditional(TomcatWebServerConfig.TomcatCondition.class)
 public class TomcatWebServerConfig {
 
-    @Value("${contextPath}")
+    @Value("${contextPath:}")
     String contextPath;
+
+    @Value("${port:8080}")
+    int port;
 
     // ServletWebServerFactory, DispatcherServlet 빈으로 등록할 경우 유연한 구성 정보 설정 가능
     @Bean("tomcatWebServerFactory")
@@ -24,15 +27,34 @@ public class TomcatWebServerConfig {
     같은 타입의 빈이 없는 경우에만 등록
      */
     @ConditionalOnMissingBean
-    public ServletWebServerFactory servletWebServerFactory(Environment env) {
+    public ServletWebServerFactory servletWebServerFactory(ServerProperties properties) {
+//        public ServletWebServerFactory servletWebServerFactory(Environment env) {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         // 모든 서블릿 매핑 앞에 해당 path가 붙음
         // curl -v "http://localhost:8080/app/hello?name=test"
+        factory.setContextPath(properties.getContextPath());
+        factory.setPort(properties.getPort());
+
+/*
         System.out.println("contextPath : " + this.contextPath);
         factory.setContextPath(this.contextPath);
-//        factory.setContextPath(env.getProperty("contextPath"));
-//        factory.setContextPath("/app");
+*/
+/*
+        factory.setContextPath(env.getProperty("contextPath"));
+        factory.setContextPath("/app");
+*/
+        factory.setPort(port);
         return factory;
+    }
+
+    @Bean
+    public ServerProperties serverProperties(Environment environment) {
+        ServerProperties properties = new ServerProperties();
+
+        properties.setContextPath(environment.getProperty("contextPath"));
+        properties.setPort(Integer.parseInt(environment.getProperty("port")));
+
+        return properties;
     }
 
 
