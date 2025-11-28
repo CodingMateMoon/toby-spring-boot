@@ -47,17 +47,6 @@ public class TomcatWebServerConfig {
         return factory;
     }
 
-    @Bean
-    public ServerProperties serverProperties(Environment environment) {
-        ServerProperties properties = new ServerProperties();
-
-        properties.setContextPath(environment.getProperty("contextPath"));
-        properties.setPort(Integer.parseInt(environment.getProperty("port")));
-
-        return properties;
-    }
-
-
 /*
     static class TomcatCondition implements Condition {
         @Override
