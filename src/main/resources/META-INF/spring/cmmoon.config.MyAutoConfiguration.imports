@@ -1,3 +1,4 @@
+cmmoon.config.autoconfig.ServerPropertiesConfig
 cmmoon.config.autoconfig.PropertyPlaceholderConfig
 cmmoon.config.autoconfig.TomcatWebServerConfig
 cmmoon.config.autoconfig.JettyWebServerConfig
