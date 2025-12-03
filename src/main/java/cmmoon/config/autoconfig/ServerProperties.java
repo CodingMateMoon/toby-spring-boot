@@ -1,5 +1,11 @@
 package cmmoon.config.autoconfig;
 
+import cmmoon.config.MyConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@MyConfigurationProperties
+// Bean Post Processor 만들어진 빈 오브젝트를 통해 조작할 작업 차리
 public class ServerProperties {
 
     private String contextPath;
