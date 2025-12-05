@@ -1,6 +1,7 @@
 package cmmoon.config.autoconfig;
 
 import cmmoon.config.ConditionalMyOnClass;
+import cmmoon.config.EnableMyConfigurationProperties;
 import cmmoon.config.MyAutoConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Import;
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
 //@Conditional(TomcatWebServerConfig.TomcatCondition.class)
 @Import(ServerProperties.class)
+@EnableMyConfigurationProperties(ServerProperties.class)
 public class TomcatWebServerConfig {
 
     @Value("${contextPath:}")
