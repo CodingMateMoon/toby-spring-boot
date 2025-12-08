@@ -1,4 +1,5 @@
 #cmmoon.config.autoconfig.ServerPropertiesConfig
+cmmoon.config.autoconfig.DataSourceConfig
 cmmoon.config.autoconfig.PropertyPostProcessorConfig
 cmmoon.config.autoconfig.PropertyPlaceholderConfig
 cmmoon.config.autoconfig.TomcatWebServerConfig
