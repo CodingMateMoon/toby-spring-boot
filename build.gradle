@@ -24,7 +24,7 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-jetty'
 //    implementation('org.springframework.boot:spring-jdbc')
     implementation('org.springframework.boot:spring-boot-starter-jdbc')
-    implementation 'com.h2database:h2'
+    runtimeOnly('com.h2database:h2')
     implementation 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
