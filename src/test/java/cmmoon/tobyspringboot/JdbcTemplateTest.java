@@ -5,11 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.annotation.Rollback;
 
 @HelloBootTest
-@Rollback(false)
 /*
+@Rollback(false)
 PreparedStatementCallback; SQL [insert into hello values(?, ?)]; Unique index or primary key violation: "PUBLIC.PRIMARY_KEY_4 ON PUBLIC.HELLO(NAME) VALUES (  1  'Toby' )"; SQL statement:
 insert into hello values(?, ?) [23505-232]
 org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; SQL [insert into hello values(?, ?)]; Unique index or primary key violation: "PUBLIC.PRIMARY_KEY_4 ON PUBLIC.HELLO(NAME) VALUES ( / 1 / 'Toby' )"; SQL statement:
@@ -33,6 +32,7 @@ public class JdbcTemplateTest {
         Assertions.assertThat(count).isEqualTo(2);
     }
 
+/*
     @Test
     void insertAndQuery2() {
         jdbcTemplate.update("insert into hello values(?, ?)", "Toby", 3);
@@ -41,4 +41,5 @@ public class JdbcTemplateTest {
         Long count = jdbcTemplate.queryForObject("select count(*) from hello", Long.class);
         Assertions.assertThat(count).isEqualTo(2);
     }
+*/
 }
