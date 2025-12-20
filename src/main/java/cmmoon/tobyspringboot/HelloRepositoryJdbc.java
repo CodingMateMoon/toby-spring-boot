@@ -1,7 +1,11 @@
 package cmmoon.tobyspringboot;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Repository
 public class HelloRepositoryJdbc implements HelloRepository {
@@ -13,7 +17,14 @@ public class HelloRepositoryJdbc implements HelloRepository {
 
     @Override
     public Hello findHello(String name) {
-        return null;
+        return jdbcTemplate.queryForObject("select * from hello where name = '" + name + "'",
+                new RowMapper<Hello>() {
+
+                    @Override
+                    public Hello mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return null;
+                    }
+                });
     }
 
     @Override
