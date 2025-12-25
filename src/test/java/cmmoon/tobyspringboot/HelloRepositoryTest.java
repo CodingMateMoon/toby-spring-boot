@@ -21,4 +21,12 @@ public class HelloRepositoryTest {
     void findHelloFailed(){
         Assertions.assertThat(helloRepository.findHello("Toby")).isNull();
     }
+
+    @Test
+    void increaseCount(){
+        helloRepository.increaseCount("Toby");
+        Assertions.assertThat(helloRepository.countOf("Toby")).isEqualTo(1);
+        helloRepository.increaseCount("Toby");
+        Assertions.assertThat(helloRepository.countOf("Toby")).isEqualTo(2);
+    }
 }
