@@ -24,6 +24,8 @@ public class HelloRepositoryTest {
 
     @Test
     void increaseCount(){
+        Assertions.assertThat(helloRepository.countOf("toby")).isEqualTo(0);
+
         helloRepository.increaseCount("Toby");
         Assertions.assertThat(helloRepository.countOf("Toby")).isEqualTo(1);
         helloRepository.increaseCount("Toby");
