@@ -24,7 +24,16 @@ import java.lang.annotation.Target;
 public class HelloServiceTest {
     @UnitTest
     void simpleHelloService() {
-        SimpleHelloService helloService = new SimpleHelloService(new HelloRepository() {
+        SimpleHelloService helloService = getHelloRepository();
+/*
+관심사는 DB 액세스 보다 Service의 sayHello 함수. 의존 오브젝트
+ */
+        String ret = helloService.sayHello("Test");
+        Assertions.assertThat(ret).isEqualTo("Hello Test");
+    }
+
+    private static SimpleHelloService getHelloRepository() {
+        return new SimpleHelloService(new HelloRepository() {
             @Override
             public Hello findHello(String name) {
                 return null;
@@ -35,11 +44,6 @@ public class HelloServiceTest {
 
             }
         });
-/*
-관심사는 DB 액세스 보다 Service의 sayHello 함수. 의존 오브젝트
- */
-        String ret = helloService.sayHello("Test");
-        Assertions.assertThat(ret).isEqualTo("Hello Test");
     }
 
     @Test
