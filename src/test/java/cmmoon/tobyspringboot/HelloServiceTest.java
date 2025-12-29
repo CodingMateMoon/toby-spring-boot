@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 public class HelloServiceTest {
     @UnitTest
     void simpleHelloService() {
-        SimpleHelloService helloService = getHelloRepository();
+        SimpleHelloService helloService = new SimpleHelloService(helloRepositoryStub);
 /*
 관심사는 DB 액세스 보다 Service의 sayHello 함수. 의존 오브젝트
  */
@@ -32,19 +32,18 @@ public class HelloServiceTest {
         Assertions.assertThat(ret).isEqualTo("Hello Test");
     }
 
-    private static SimpleHelloService getHelloRepository() {
-        return new SimpleHelloService(new HelloRepository() {
-            @Override
-            public Hello findHello(String name) {
-                return null;
-            }
+    // HelloRepository 구현체 반복되는 경우 Stub으로 만들어서 재사용
+    private static HelloRepository helloRepositoryStub = new HelloRepository() {
+        @Override
+        public Hello findHello(String name) {
+            return null;
+        }
 
-            @Override
-            public void increaseCount(String name) {
+        @Override
+        public void increaseCount(String name) {
 
-            }
-        });
-    }
+        }
+    };
 
     @Test
     void helloDecorator() {
