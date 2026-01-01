@@ -1,10 +1,12 @@
 package cmmoon.tobyspringboot;
 
 import cmmoon.config.MySpringBootApplication;
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @MySpringBootApplication
 /* Bean 오브젝트 팩토리 메서드를 가진 클래스임을 명시. AnnotationConfig를 이용하는 ApplicationContext에 처음으로 등록됨(@Configuration 붙은 클래스)
@@ -16,6 +18,16 @@ import org.springframework.core.env.Environment;
 */
 //@SpringBootApplication
 public class TobySpringBootApplication {
+    private final JdbcTemplate jdbcTemplate;
+
+    public TobySpringBootApplication(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @PostConstruct
+    void init() {
+        this.jdbcTemplate.execute("create table if not exists hello(name varchar(50) primary key, count int)");
+    }
 
     @Bean
     ApplicationRunner applicationRunner(Environment env){
