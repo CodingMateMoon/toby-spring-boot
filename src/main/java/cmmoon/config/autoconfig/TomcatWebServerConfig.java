@@ -20,7 +20,7 @@ public class TomcatWebServerConfig {
     @Value("${contextPath:}")
     String contextPath;
 
-    @Value("${port:8080}")
+    @Value("${port:9090}")
     int port;
 
     // ServletWebServerFactory, DispatcherServlet 빈으로 등록할 경우 유연한 구성 정보 설정 가능

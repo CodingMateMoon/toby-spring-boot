@@ -15,4 +15,9 @@ public class SimpleHelloService implements HelloService {
         this.helloRepository.increaseCount(name);
         return "Hello " + name;
     }
+
+    @Override
+    public int countOf(String name) {
+        return helloRepository.countOf(name);
+    }
 }

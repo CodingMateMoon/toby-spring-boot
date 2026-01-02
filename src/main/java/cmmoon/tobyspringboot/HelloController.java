@@ -34,6 +34,11 @@ public class HelloController {
         return helloService.sayHello(name);
     }
 
+    @GetMapping("/count")
+    public String count(String name) {
+        return name  + ": " + helloService.countOf(name);
+    }
+
     /*
     //Root WebApplicationContext, started on Tue Sep 09 08:55:05 KST 2025
     @Override
